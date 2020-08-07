@@ -76,10 +76,20 @@ we know that the RDMA connection is correctly configured and works well.
 {{step "Establishing a connection"}}
 
 <p>
-XXX
-- introduce the librpma library
-- maybe put here the schematic showing where librpma fits into the Linux RDMA-capable stack
-- describe that the following program focuses solely on establishing a connection
+The Remote Persistent Memory Access library (librpma) is a C library to simplify accessing PMem on remote systems over RDMA. For more information see <a href="https://pmem.io/rpma/" target="_blank">pmem.io</a>.
+
+<p>
+<img src="/img/examples/{{.Ex}}/ecosystem.jpg" class="figure">
+
+<p>
+In this step, you will implement both sides of an RDMA connection:
+<ul>
+    <li>a server that waits for incoming connections using a single endpoint (see the <a href="https://pmem.io/rpma/manpages/master/librpma.7.html#server-operation" target="_blank">server operation documentation</a> for details).</li>
+    <li>a client which attempts to establish the connection to the server (see the <a href="https://pmem.io/rpma/manpages/master/librpma.7.html#client-operation" target="_blank">client operation documentation</a> for details)</li>
+</ul>
+
+<p>
+These applications are intentionally doing no more than connection and disconnection to familiarize you with the process. Building on this you will do more in the next step.
 
 {{edit "simple_client.c" "simple_server.c" "connection.h" "connection.c" "CMakeLists.txt" "build_simple.sh"}}
 
