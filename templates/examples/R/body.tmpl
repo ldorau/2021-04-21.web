@@ -18,10 +18,10 @@ Remote Persistent Memory Access, makes sense right?).
 <p>
 After completing this example you will know:
 <ul>
-    <li>what is RPMem and what it is good for</li>
-    <li>how RPMem is different comparing to PMem</li>
-    <li>what hardware and software components are required to start using RPMem</li>
-    <li>how to verify whether the RDMA network works properly</li>
+    <li>what is RPMem and what it is good for,</li>
+    <li>how RPMem is different comparing to PMem,</li>
+    <li>what hardware and software components are required to start using RPMem,</li>
+    <li>how to verify whether the RDMA network works properly,</li>
     <li>how to use librpma API to:
         <ul>
             <li>establish a connection,</li>
@@ -35,9 +35,9 @@ After completing this example you will know:
 <p>
 Step-by-step you will:
 <ul>
-    <li>test the connection on the basic level using ping</li>
-    <li>test the connection RDMA capabilities using rping</li>
-    <li>review an application focusing on establishing a connection</li>
+    <li>test the connection on the basic level using ping,</li>
+    <li>test the connection RDMA capabilities using rping,</li>
+    <li>review an application focusing on establishing a connection,</li>
     <li>review an application reading remote system's memory and writing it back
         in the persistent manner.</li>
 </ul>
@@ -103,10 +103,10 @@ In this step, you will implement both sides of an RDMA connection:
 <ul>
     <li>a server that waits for incoming connections using a single endpoint (see the
         <a href="https://pmem.io/rpma/manpages/master/librpma.7.html#server-operation" target="_blank">server operation documentation</a>
-        for details).</li>
+        for details),</li>
     <li>a client which attempts to establish the connection to the server (see the
         <a href="https://pmem.io/rpma/manpages/master/librpma.7.html#client-operation" target="_blank">client operation documentation</a>
-        for details)</li>
+        for details).</li>
 </ul>
 
 <p>
@@ -151,15 +151,15 @@ memory and finally it flushes the just written data down to the persistent domai
 <p>
 Looking more deeply into the code it can be re-described in the following way:
 <ul>
-<li>The server prepares a local persistent memory and exposes the memory description
-along with other parameters required to perform an RDMA read, write and flush operations.
-After the connection is established, the server waits for the client to disconnect.</li>
-<li>The client allocates memory from DRAM and registers it as a reading destination
-and writing source. After the connection is established the client receives
-the server's memory regions registered as a reading source and a writing destination.
-The client performs the RDMA read from the remote memory region to the local memory
-region, then it writes new data to the local memory region and performs the RDMA write
-from the local memory region to the remote memory region followed by the RPMA flush.</li>
+    <li>The server prepares a local persistent memory and exposes the memory description
+        along with other parameters required to perform an RDMA read, write and flush operations.
+        After the connection is established, the server waits for the client to disconnect.</li>
+    <li>The client allocates memory from DRAM and registers it as a reading destination
+        and writing source. After the connection is established the client receives
+        the server's memory regions registered as a reading source and a writing destination.
+        The client performs the RDMA read from the remote memory region to the local memory
+        region, then it writes new data to the local memory region and performs the RDMA write
+        from the local memory region to the remote memory region followed by the RPMA flush.</li>
 </ul>
 
 <p>
@@ -191,25 +191,25 @@ files copied from the previous step.
 <p>
 During this session, you have:
 <ul>
-    <li>checked the basic network connectivity</li>
-    <li>checked whether the network is RDMA-capable</li>
-    <li>established a connection using the librpma library</li>
-    <li>read and written back the RPMem's content in the persistent way</li>
+    <li>checked the basic network connectivity,</li>
+    <li>checked whether the network is RDMA-capable,</li>
+    <li>established a connection using the librpma library,</li>
+    <li>read and written back the RPMem's content in the persistent way.</li>
 </ul>
 
 <p>
 Takeaways:
 <ul>
     <li>Remote Persistent Memory (RPMem) is a way of accessing Persistent Memory when
-        it is installed in a remote system</li>
+        it is installed in a remote system.</li>
     <li>RPMem leverages RDMA capabilities to achieve e.g.:
         <ul>
-            <li>zero-copy read of the contents of RPMem</li>
-            <li>single-sided persistency of the PMem's contents in a remote system</li>
+            <li>zero-copy read of the contents of RPMem,</li>
+            <li>single-sided persistency of the PMem's contents in a remote system.</li>
         </ul>
     </li>
-    <li>RPMem is a way to seamlessly incorporate PMem into modern cloud architectures</li>
-    <li>the librpma library is a ready-to-use simple API incarnating RPMem principles</li>
+    <li>RPMem is a way to seamlessly incorporate PMem into modern cloud architectures.</li>
+    <li>The librpma library is a ready-to-use simple API incarnating RPMem principles.</li>
 </ul>
 
 <p>
@@ -224,9 +224,9 @@ If you want to learn more:
         </ul>
     </li>
     <li><a href="https://pmem.io/rpma/" target="_blank">https://pmem.io/rpma/</a>
-         - where you can find the librpma library manuals, configuration guidelines and performance reports</li>
+         - where you can find the librpma library manuals, configuration guidelines and performance reports.</li>
     <li>It may be also useful to read our whitepaper:
-        <a href="https://www.intel.com/content/www/us/en/developer/articles/technical/persistent-memory-replication-over-traditional-rdma-part-1-understanding-remote-persistent.html" target="_blank">Persistent Memory Replication Over Traditional RDMA</a>
+        <a href="https://www.intel.com/content/www/us/en/developer/articles/technical/persistent-memory-replication-over-traditional-rdma-part-1-understanding-remote-persistent.html" target="_blank">Persistent Memory Replication Over Traditional RDMA</a>.
         <ul>
             <li><b>Note</b> it describes RPMem in the context of the librpmem library
                 (do not confuse with librpma) which is a completely different story.</li>
