@@ -76,9 +76,10 @@ In this step we will check the RDMA connection with the RDMA ping-pong test usin
 the rping command (provided by the librdmacm-utils package).
 
 <p>
-The rping(1) command establishes a reliable RDMA connection between two nodes using
+The rping command establishes a reliable RDMA connection between two nodes using
 librdmacm and optionally performs RDMA transfers between the nodes, then disconnects.
-When rping works, we know that the RDMA connection is correctly configured and works well.
+When rping works, we know that the RDMA connection is correctly configured and works well (see the <a href="https://linux.die.net/man/1/rping" target="_blank">rping(1)</a>
+manual for details).
 
 {{edit "run_test_rping.sh"}}
 
