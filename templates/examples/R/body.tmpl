@@ -1,0 +1,84 @@
+{{top "Remote Persistent Memory"}}
+
+<p class="intro">
+XXX
+- one more time briefly about the purpose of the tutorial
+
+{{template "scrollToContinue"}}
+
+<p>
+XXX
+- briefly what hardware and software components are required
+- introduce what step-by-step will happen during this tutorial
+    - ping / rping connectivity check
+    - a simple "just esablish a connection" program
+    - the final program general idea
+
+{{step "Connectivity check"}}
+
+<p>
+XXX
+- describe the networking environment (IPs etc.)
+
+{{output "run_connectivity_check_ping.sh" "192.168.1.100"}}
+
+{{run "./run_connectivity_check_ping.sh"}}
+
+<p>
+XXX
+- introduce rping(1)
+
+XXX It seems the rping script (and other two-sided scripts)
+may work in the following way:
+
+```sh
+SERVER_IP=192.168.1.100
+rping -s -a $SERVER_IP -C 10 &
+rping -c -a $SERVER_IP -C 10 -v
+```
+
+{{output "run_connectivity_check_rping.sh" "192.168.1.100"}}
+
+{{run "./run_connectivity_check_rping.sh"}}
+
+{{step "Establishing a connection"}}
+
+<p>
+XXX
+- briefly introduce the librpma library
+- the following program focuses solely on establishing a connection
+
+{{edit "simple_client.c" "simple_server.c" "connection.h" "connection.c" "CMakeLists.txt"}}
+
+{{output "build_simple.sh"}}
+
+{{build "./build_simple.sh"}}
+
+{{output "run_simple.sh" "192.168.1.100"}}
+
+{{run "./run_simple.sh"}}
+
+{{step "Remote Persistent Memory access"}}
+
+<p>
+XXX
+- introduce used rpma_read/write/flush() operations and
+- describe their role in achieving the assumed aim
+- refer the "connection.h" "connection.c" files are taken from the previous step
+
+{{edit "xxx_client.c" "xxx_server.c" "CMakeLists.txt"}}
+
+{{output "build_xxx.sh"}}
+
+{{build "./build_xxx.sh"}}
+
+{{output "run_xxx.sh" "192.168.1.100"}}
+
+{{run "./run_xxx.sh"}}
+
+{{summary}}
+
+<p>
+XXX
+
+{{bottom}}
