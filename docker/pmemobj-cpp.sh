@@ -5,7 +5,7 @@ cd libpmemobj-cpp
 mkdir build
 cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=/usr
-make
+make -j$(nproc)
 make install
 cd ../..
 rm -r libpmemobj-cpp
