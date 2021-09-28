@@ -32,14 +32,11 @@ RUN dnf update -y && dnf install -y\
 	golang\
 	gtest-devel\
 	hub\
-	iproute\
-	iputils\
 	json-c-devel\
 	keyutils-libs-devel\
 	kmod-devel\
 	lbzip2\
 	libatomic\
-	librdmacm-utils\
 	libtool\
 	libudev-devel\
 	libunwind-devel\
@@ -50,7 +47,6 @@ RUN dnf update -y && dnf install -y\
 	memkind\
 	memkind-devel\
 	nano\
-	net-tools\
 	ncurses-devel\
 	ndctl-devel\
 	numactl-devel\
@@ -62,7 +58,6 @@ RUN dnf update -y && dnf install -y\
 	pkgconfig\
 	python3-devel\
 	rapidjson-devel\
-	rdma-core-devel\
 	rpm-build\
 	rpm-build-libs\
 	rpmdevtools\
@@ -78,48 +73,15 @@ RUN dnf update -y && dnf install -y\
 	xmlto\
 	xmvn
 
-RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash -
-
-RUN dnf install -y nodejs
-
-RUN dnf debuginfo-install -y glibc
-
-RUN dnf clean all
+RUN dnf install -y\
+	iproute\
+	iputils\
+	librdmacm-utils\
+	net-tools\
+	rdma-core-devel
 
 COPY pmdk.sh /
 RUN /pmdk.sh
 
-COPY valgrind.sh /
-RUN /valgrind.sh
-
-COPY pmemobj-cpp.sh /
-RUN /pmemobj-cpp.sh
-
-COPY pmemkv.sh /
-RUN /pmemkv.sh
-
-COPY pmemkv-jni.sh /
-RUN /pmemkv-jni.sh
-
-COPY pmemkv-java.sh /
-RUN /pmemkv-java.sh
-
-COPY pmemkv-python.sh /
-RUN /pmemkv-python.sh
-
-COPY pmemkv-nodejs.sh /
-RUN /pmemkv-nodejs.sh
-
-COPY pmemkv-ruby.sh /
-RUN /pmemkv-ruby.sh
-
-COPY memkind.sh /
-RUN /memkind.sh
-
 COPY librpma.sh /
 RUN /librpma.sh
-
-COPY tz.sh /
-RUN /tz.sh
-
-RUN rm /pmdk.sh /valgrind.sh /pmemobj-cpp.sh /pmemkv.sh /pmemkv-jni.sh /pmemkv-java.sh /pmemkv-python.sh /pmemkv-nodejs.sh /pmemkv-ruby.sh /memkind.sh /librpma.sh /tz.sh
