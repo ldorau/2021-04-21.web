@@ -111,7 +111,10 @@ RUN /pmemkv-ruby.sh
 COPY memkind.sh /
 RUN /memkind.sh
 
+COPY librpma.sh /
+RUN /librpma.sh
+
 COPY tz.sh /
 RUN /tz.sh
 
-RUN rm /pmdk.sh /valgrind.sh /pmemobj-cpp.sh /pmemkv.sh /pmemkv-jni.sh /pmemkv-java.sh /pmemkv-python.sh /pmemkv-nodejs.sh /pmemkv-ruby.sh /memkind.sh /tz.sh
+RUN rm /pmdk.sh /valgrind.sh /pmemobj-cpp.sh /pmemkv.sh /pmemkv-jni.sh /pmemkv-java.sh /pmemkv-python.sh /pmemkv-nodejs.sh /pmemkv-ruby.sh /memkind.sh /librpma.sh /tz.sh
