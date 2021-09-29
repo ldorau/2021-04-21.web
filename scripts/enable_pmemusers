@@ -108,7 +108,8 @@ for (my $id = $Lo; $id <= $Hi; $id++) {
 	my $ip = `./scripts/config_softroce.sh`;
 	die "config_softroce.sh failed: $ip\n" if ($? >> 8);
 	runy("echo 'enable_pmemusers: RPMA_SOFT_ROCE_IP=$ip'");
-	runy("docker run -t -d --name=$user --network host --env RPMA_SOFT_ROCE_IP=$ip --device /dev/infiniband:/dev/infiniband -v /sys/class/infiniband:/sys/class/infiniband -v /sys/class/infiniband_verbs:/sys/class/infiniband_verbs -v /sys/class/misc/rdma_cm:/sys/class/misc/rdma_cm -v $H/users/$user/shadow:/etc/shadow -v $H/users/$user/passwd:/etc/passwd -v $H/users/$user/group:/etc/group -v $H/users/$user/home:/home/$user -v $pmemdir:/pmem -u $thisid:$thisid --hostname=container$id --workdir=/home/$user --cap-add SYS_PTRACE --restart=unless-stopped $Image");
+	runy("echo 'enable_pmemusers: PMEMUSER_ID=$id'");
+	runy("docker run -t -d --name=$user --network host --env RPMA_SOFT_ROCE_IP=$ip --env PMEMUSER_ID=$id --device /dev/infiniband:/dev/infiniband -v /sys/class/infiniband:/sys/class/infiniband -v /sys/class/infiniband_verbs:/sys/class/infiniband_verbs -v /sys/class/misc/rdma_cm:/sys/class/misc/rdma_cm -v $H/users/$user/shadow:/etc/shadow -v $H/users/$user/passwd:/etc/passwd -v $H/users/$user/group:/etc/group -v $H/users/$user/home:/home/$user -v $pmemdir:/pmem -u $thisid:$thisid --hostname=container$id --workdir=/home/$user --cap-add SYS_PTRACE --restart=unless-stopped $Image");
 }
 
 say('done');
