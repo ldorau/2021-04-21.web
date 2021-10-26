@@ -2,13 +2,16 @@
 
 <p class="intro">
 XXX
-- one more time briefly about the purpose of the tutorial
+- what is RPMEM?
+- what is the difference between PMEM and RPMEM?
+- what RPMEM is good for?
+- expected outcomes for the trainee
+- what the trainee will do during this tutorial (high-level)?
 
 {{template "scrollToContinue"}}
 
 <p>
 XXX
-- briefly what hardware and software components are required
 - introduce what step-by-step will happen during this tutorial
     - ping / rping connectivity check
     - a simple "just esablish a connection" program
@@ -18,7 +21,9 @@ XXX
 
 <p>
 XXX
+- briefly what network hardware and software components are required
 - describe the networking environment (IPs etc.)
+- describe what and how is achieved during this step
 
 {{edit "run_test_ping.sh"}}
 
@@ -27,9 +32,8 @@ XXX
 <p>
 XXX
 - introduce rping(1)
-
-XXX It seems the rping script (and other two-sided scripts)
-may work in the following way:
+- what rping does comparing to ping?
+- describe what and how is achieved during this step
 
 {{edit "run_test_rping.sh"}}
 
@@ -39,8 +43,9 @@ may work in the following way:
 
 <p>
 XXX
-- briefly introduce the librpma library
-- the following program focuses solely on establishing a connection
+- introduce the librpma library
+- maybe put here the schematic showing where librpma fits into the Linux RDMA-capable stack
+- describe that the following program focuses solely on establishing a connection
 
 {{edit "simple_client.c" "simple_server.c" "connection.h" "connection.c" "CMakeLists.txt" "build_simple.sh"}}
 
@@ -55,7 +60,8 @@ XXX
 <p>
 XXX
 - introduce used rpma_read/write/flush() operations and
-- describe their role in achieving the assumed aim
+- describe their role in achieving remote persistency
+- describe what the example does
 - refer the "connection.h" "connection.c" files are taken from the previous step
 
 {{edit "client.c" "server.c" "connection.h" "build_main.sh"}}
@@ -70,5 +76,11 @@ XXX
 
 <p>
 XXX
+- recap what has been done during this training
+- takeaways
+- if you want to learn more please read the our materials:
+    - examples
+    - white paper
+    - anything else?
 
 {{bottom}}
