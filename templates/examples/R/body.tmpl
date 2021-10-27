@@ -19,21 +19,33 @@ XXX
 
 {{step "Connectivity check"}}
 
-<p>
-XXX
-- briefly what network hardware and software components are required
-- describe the networking environment (IPs etc.)
-- describe what and how is achieved during this step
+<p> In order to have a real RDMA network connection you have to have: </br>
+<ul>
+    <li> two machines both equipped with an RDMA-enabled Ethernet or InfiniBand adapter cards connected with a cable, </li>
+    <li> libibverbs and librdmacm libraries installed (or rdma-core package containing both of them). </li>
+</ul>
+
+<p> In order to have a software-emulated (RoCE) RDMA network connection you have to have: </br>
+<ul>
+    <li> one machine with a network adapter, </li>
+    <li> the above listed libraries and </li>
+    <li >the 'rdma_rxe' kernel module loaded. </li>
+</ul>
+
+<p> All used network interfaces should be configured, up and running with an IP address assigned.
+
+<p> In this step we will check the basic Ethernet network connectivity using the ping command (see the ping(8) manual for details).
 
 {{edit "run_test_ping.sh"}}
 
 {{run "./run_test_ping.sh"}}
 
-<p>
-XXX
-- introduce rping(1)
-- what rping does comparing to ping?
-- describe what and how is achieved during this step
+<p> In this step we will check the RDMA CM connection with the RDMA ping-pong test using the rping command
+(the librdmacm-utils package has to be installed to have this command).
+
+<p> The rping(1) command establishes a reliable RDMA connection between two nodes using the librdmacm
+and optionally performs RDMA transfers between the nodes, then disconnects.</br>
+When rping works, we know that the RDMA connection is correctly configured and works well.
 
 {{edit "run_test_rping.sh"}}
 
