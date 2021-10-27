@@ -92,8 +92,22 @@ die "no pmemuserX accounts in /etc/passwd\n" if $nopasswd;
 
 my @pmem_mounts = ('/pmem0', '/pmem1');
 
-# minimum required size of device DAX is 800 kB (4kB per user)
-my $dev_dax = '/dev/dax0.0';
+# set name of device DAX
+my $dax_name = "dax0.0";
+
+# check if the device DAX exists
+my $dev_dax = "/dev/$dax_name";
+die "$dev_dax device DAX not found\n" unless -c "$dev_dax";
+
+# look for device DAX in ndctl
+my $exists = `ndctl list | grep -c -e "$dax_name"`;
+chomp($exists);
+die "$dev_dax device DAX not listed by ndctl\n" if ($exists != 1);
+
+# the minimum required size of device DAX is 800 kiB (4kiB per user)
+my $size = `ndctl list | grep -B2 -e "$dax_name" | grep size | cut -d: -f2 | cut -d, -f1 | cut -d'"' -f2`;
+chomp($size);
+die "size of device DAX is less than 800kiB ($size < 819200)\n" if ($size < 819200);
 
 for (my $id = $Lo; $id <= $Hi; $id++) {
 	my $thisid = $BASEID + $id;
