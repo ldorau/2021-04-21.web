@@ -85,6 +85,7 @@ die "$H/img directory not found\n" unless -d "$H/img";
 die "$H/js directory not found\n" unless -d "$H/js";
 die "$H/templates directory not found\n" unless -d "$H/templates";
 die "$H/users directory not found\n" unless -d "$H/users";
+die "the jq command is missing\n" unless system("which jq") == 0;
 
 my $passwd = `grep '^pmemuser[0-9][0-9]*:' /etc/passwd`;
 my $nopasswd = $? >> 8;
@@ -92,8 +93,21 @@ die "no pmemuserX accounts in /etc/passwd\n" if $nopasswd;
 
 my @pmem_mounts = ('/pmem0', '/pmem1');
 
-# minimum required size of device DAX is 800 kB (4kB per user)
-my $dev_dax = '/dev/dax0.0';
+# set name of device DAX
+my $dax_name = "dax0.0";
+
+# check if the device DAX exists
+my $dev_dax = "/dev/$dax_name";
+die "$dev_dax device DAX not found\n" unless -c "$dev_dax";
+
+# look for device DAX in ndctl
+my $exists = `ndctl list | grep -c -e "$dax_name"`;
+chomp($exists);
+die "$dev_dax device DAX not listed by ndctl\n" if ($exists != 1);
+
+# verify if the device DAX has the minimum required size of 800KiB (4KiB per user)
+my $size = `ndctl list | jq '.[] | select(.chardev=="$dax_name")' | jq '.size'`;
+die "size of device DAX is less than 800KiB ($size < 819200)\n" if ($size < 819200);
 
 for (my $id = $Lo; $id <= $Hi; $id++) {
 	my $thisid = $BASEID + $id;
