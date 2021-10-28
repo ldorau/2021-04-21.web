@@ -1,21 +1,56 @@
 {{top "Remote Persistent Memory"}}
 
-<p class="intro">
-XXX
-- what is RPMEM?
-- what is the difference between PMEM and RPMEM?
-- what RPMEM is good for?
-- what the trainee will do during this tutorial (high-level)?
-- expected outcomes for the trainee
-
-{{template "scrollToContinue"}}
+<p>
+We assume you already know what Persistent Memory (or PMem for short) is and hopefully you have learned many possible ways of benefiting from using it in your applications. In this example we want to introduce to you a basic way of accessing the very same Persistent Memory but when it is installed in a remote system. Remote Persistent Memory (or RPMem for short) is a way of doing this by making use of the Remote Direct Memory Access (RDMA) network.
 
 <p>
-XXX
-- introduce what step-by-step will happen during this tutorial
-    - ping / rping connectivity check
-    - a simple "just esablish a connection" program
-    - the final program general idea
+You may ask why you even bother doing so? Why your application simply cannot run on the remote system where the already mentioned Persistent Memory is installed instead of on yet another system? Why complicate the solution?
+
+<p>
+There are many possible answers to all of these questions:
+<ul>
+    <li>scalability</li>
+    <li>fail-safety</li>
+    <li>redundancy</li>
+    <li>migrability</li>
+    <li>configurability</li>
+    <li>...</li>
+</ul>
+
+<p>
+Long story short, RPMem is a way how to fit Persistent Memory into modern cloud-based applications.
+
+<p>
+Before we go any further, you have to understand that despite PMem and RPMem both are making use of the same Persistent Memory, RPMem accesses Persistent Memory via the network. Network technologies develop rapidly but they are still a few orders of magnitude slower comparing to accessing the local memory directly. This makes PMem and RPMem ideal for different applications. If you want to learn more about the performance achievable with RPMem please follow the link: <a href="https://pmem.io/rpma/reports/index.html" target="_blank">Performance Reports</a>.
+
+<p>
+This example is an introduction to RPMem. We will guide you briefly through setting up all required hardware and software components and verifying whether the connection works properly. Having that, we will show you how to access Persistent Memory on a remote system using the librpma library (where RPMA stands for Remote Persistent Memory Access, makes sense right?).
+
+<p>
+After completing this example you will know:
+<ul>
+    <li>what is RPMem and what it is good for</li>
+    <li>how RPMem is different comparing to PMem</li>
+    <li>what hardware and software components are required to start using RPMem</li>
+    <li>how to verify whether the RDMA network works properly</li>
+    <li>how to use librpma API to:
+        <ul>
+            <li>establish a connection,</li>
+            <li>prepare memory for remote manipulation,</li>
+            <li>manipulate memory on the remote system,</li>
+            <li>assure persistency of stores to the remote system.</li>
+        </ul>
+    </li>
+</ul>
+
+<p>
+Step-by-step you will:
+<ul>
+    <li>test the connection on the basic level using ping</li>
+    <li>test the connection RDMA capabilities using rping</li>
+    <li>review an application focusing on establishing a connection</li>
+    <li>review an application reading remote system's memory and writing it back in the persistent manner.</li>
+</ul>
 
 {{step "Connectivity check"}}
 
