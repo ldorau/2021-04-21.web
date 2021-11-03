@@ -94,12 +94,49 @@ XXX
 {{summary}}
 
 <p>
-XXX
-- recap what has been done during this training
-- takeaways
-- if you want to learn more please read the our materials:
-    - examples
-    - white paper
-    - anything else?
+During this session, you have:
+<ul>
+    <li>checked basic network connectivity</li>
+    <li>checked whether the network is RDMA-capable</li>
+    <li>established a connection using the librpma library</li>
+    <li>read and wrote back RPMem's content in the persistent way</li>
+</ul>
+
+<p>
+Takeaways:
+<ul>
+    <li>Remote Persistent Memory (RPMem) is a way of accessing Persistent Memory when it is installed in a remote system</li>
+    <li>RPMem leverages RDMA capabilities to achieve e.g.:
+        <ul>
+            <li>zero-copy read of the contents of RPMem</li>
+            <li>single-sided persistency of the PMem's contents on the remote system</li>
+        </ul>
+    </li>
+    <li>RPMem is a way to seamlessly incorporate PMem into modern cloud architectures</li>
+    <li>The librpma library is a ready to use simple API incarnating RPMem principles</li>
+</ul>
+
+<p>
+If you want to learn more:
+<ul>
+    <li><a href="https://github.com/pmem/rpma" target="_blank">https://github.com/pmem/rpma</a> - where librpma is forged
+        <ul>
+            <li>We especially recommend getting familiar with <a href="https://github.com/pmem/rpma/tree/master/examples" target="_blank">examples</a> that allows you to learn about other supported use-cases.</li>
+        </ul>
+    </li>
+    <li><a href="https://pmem.io/rpma/" target="_blank">https://pmem.io/rpma/</a> - where you can find the librpma library manuals, configuration guidelines and performance reports</li>
+    <li>It may be also useful to read our whitepaper: <a href="https://www.intel.com/content/www/us/en/developer/articles/technical/persistent-memory-replication-over-traditional-rdma-part-1-understanding-remote-persistent.html" target="_blank">Persistent Memory Replication Over Traditional RDMA</a>
+        <ul>
+            <li><b>Note</b> it describes RPMem in the context of the librpmem library (do not confuse with librpma) which is a completely different story.</li>
+        </ul>
+    </li>
+</ul>
+
+<p>
+Thank you very much for your attention!
+
+<p>
+Yours sincerely<br/>
+RPMem PMDK Squad
 
 {{bottom}}
