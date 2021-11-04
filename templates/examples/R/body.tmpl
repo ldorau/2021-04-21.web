@@ -1,10 +1,19 @@
 {{top "Remote Persistent Memory"}}
 
 <p>
-We assume you already know what Persistent Memory (or PMem for short) is and hopefully you have learned many possible ways of benefiting from using it in your applications. In this example we want to introduce to you a basic way of accessing the very same Persistent Memory but when it is installed in a remote system. Remote Persistent Memory (or RPMem for short) is a way of doing this via a network by making use of the Remote Direct Memory Access (RDMA) technology.
+We assume you already know what Persistent Memory (or PMem for short) is and hopefully
+you have learned many possible ways of benefiting from using it in your applications.
+In this example we want to introduce to you a basic way of accessing the very same
+Persistent Memory but when it is installed in a remote system. Remote Persistent Memory
+(or RPMem for short) is a way of doing this via a network by making use
+of the Remote Direct Memory Access (RDMA) technology.
 
 <p>
-This example is an introduction to RPMem. We will guide you briefly through setting up all required hardware and software components and verifying whether the connection works properly. Having that, we will show you how to access Persistent Memory on a remote system using the librpma library (where RPMA stands for Remote Persistent Memory Access, makes sense right?).
+This example is an introduction to RPMem. We will guide you briefly through setting up
+all required hardware and software components and verifying whether the connection
+works properly. Having that, we will show you how to access Persistent Memory
+on a remote system using the librpma library (where RPMA stands for
+Remote Persistent Memory Access, makes sense right?).
 
 <p>
 After completing this example you will know:
@@ -29,7 +38,8 @@ Step-by-step you will:
     <li>test the connection on the basic level using ping</li>
     <li>test the connection RDMA capabilities using rping</li>
     <li>review an application focusing on establishing a connection</li>
-    <li>review an application reading remote system's memory and writing it back in the persistent manner.</li>
+    <li>review an application reading remote system's memory and writing it back
+        in the persistent manner.</li>
 </ul>
 
 {{step "Connectivity check"}}
@@ -37,12 +47,15 @@ Step-by-step you will:
 <p>
 In order to have a real RDMA network you have to have:
 <ul>
-    <li>two machines both equipped with RDMA-capable network adapters connected to each other,</li>
-    <li>libibverbs and librdmacm libraries installed in both systems (or the rdma-core package containing both of them).</li>
+    <li>two machines both equipped with RDMA-capable network adapters connected
+        to each other,</li>
+    <li>libibverbs and librdmacm libraries installed in both systems (or the rdma-core
+        package containing both of them).</li>
 </ul>
 
 <p>
-Alternatively, for development purposes, you can use a software-emulated RDMA network interface (SoftRoCE) which requires:
+Alternatively, for development purposes, you can use a software-emulated RDMA network
+interface (SoftRoCE) which requires:
 <ul>
     <li>one machine with a regular Ethernet network adapter,</li>
     <li>the above listed libraries and</li>
@@ -50,24 +63,26 @@ Alternatively, for development purposes, you can use a software-emulated RDMA ne
 </ul>
 
 <p>
-All used network interfaces should be configured, up and running with an IP address assigned.
+All used network interfaces should be configured, up and running with an IP address
+assigned.
 
 <p>
 In this step, we will check the basic Ethernet network connectivity using the ping command
-(see the <a href="https://linux.die.net/man/8/ping" target="_blank">ping(8) manual</a> for details).
+(see the <a href="https://linux.die.net/man/8/ping" target="_blank">ping(8) manual</a>
+for details).
 
 {{edit "run_test_ping.sh"}}
 
 {{run "./run_test_ping.sh"}}
 
 <p>
-In this step we will check the RDMA CM connection with the RDMA ping-pong test using the rping command
-(provided by the librdmacm-utils package).
+In this step we will check the RDMA CM connection with the RDMA ping-pong test using
+the rping command (provided by the librdmacm-utils package).
 
 <p>
-The rping(1) command establishes a reliable RDMA connection between two nodes using librdmacm
-and optionally performs RDMA transfers between the nodes, then disconnects. When rping works,
-we know that the RDMA connection is correctly configured and works well.
+The rping(1) command establishes a reliable RDMA connection between two nodes using
+librdmacm and optionally performs RDMA transfers between the nodes, then disconnects.
+When rping works, we know that the RDMA connection is correctly configured and works well.
 
 {{edit "run_test_rping.sh"}}
 
@@ -76,7 +91,9 @@ we know that the RDMA connection is correctly configured and works well.
 {{step "Establishing a connection"}}
 
 <p>
-The Remote Persistent Memory Access library (librpma) is a C library to simplify accessing PMem on remote systems over RDMA. For more information see <a href="https://pmem.io/rpma/" target="_blank">pmem.io</a>.
+The Remote Persistent Memory Access library (librpma) is a C library to simplify accessing
+PMem on remote systems over RDMA. For more information see
+<a href="https://pmem.io/rpma/" target="_blank">pmem.io</a>.
 
 <p>
 <img src="/img/examples/{{.Ex}}/ecosystem.jpg" class="figure" style="width: 100%;">
@@ -84,12 +101,17 @@ The Remote Persistent Memory Access library (librpma) is a C library to simplify
 <p>
 In this step, you will implement both sides of an RDMA connection:
 <ul>
-    <li>a server that waits for incoming connections using a single endpoint (see the <a href="https://pmem.io/rpma/manpages/master/librpma.7.html#server-operation" target="_blank">server operation documentation</a> for details).</li>
-    <li>a client which attempts to establish the connection to the server (see the <a href="https://pmem.io/rpma/manpages/master/librpma.7.html#client-operation" target="_blank">client operation documentation</a> for details)</li>
+    <li>a server that waits for incoming connections using a single endpoint (see the
+        <a href="https://pmem.io/rpma/manpages/master/librpma.7.html#server-operation" target="_blank">server operation documentation</a>
+        for details).</li>
+    <li>a client which attempts to establish the connection to the server (see the
+        <a href="https://pmem.io/rpma/manpages/master/librpma.7.html#client-operation" target="_blank">client operation documentation</a>
+        for details)</li>
 </ul>
 
 <p>
-These applications intentionally do only connection and disconnection to familiarize you with these processes. Building on this you will do more in the next step.
+These applications intentionally do only connection and disconnection to familiarize you
+with these processes. Building on this you will do more in the next step.
 
 {{edit "simple_client.c" "simple_server.c" "connection.h" "connection.c" "CMakeLists.txt" "build_simple.sh"}}
 
@@ -102,26 +124,33 @@ These applications intentionally do only connection and disconnection to familia
 {{step "Remote Persistent Memory access"}}
 
 <p>
-In this step we will read and write back RPMem's content in the persistent way using the following librpma functions:
+In this step we will read and write back RPMem's content in the persistent way using
+the following librpma functions:
 <ul>
-    <li><code>rpma_read()</code> - initiates transferring (reading) data from the remote memory to the local memory
-        (see the <a href="https://pmem.io/rpma/manpages/master/rpma_read.3" target="_blank">rpma_read(3) manual</a> for details),</li>
-    <li><code>rpma_write()</code> - initiates transferring (writing) data from the local memory to the remote memory
-        (see the <a href="https://pmem.io/rpma/manpages/master/rpma_write.3" target="_blank">rpma_write(3) manual</a> for details),</li>
-    <li><code>rpma_flush()</code> - initiates finalizing a transfer of data to the remote memory,
-        it flushes data down to the persistent domain (see the
-        <a href="https://pmem.io/rpma/manpages/master/rpma_flush.3" target="_blank">rpma_flush(3) manual</a> for details).</li>
+    <li><code>rpma_read()</code> - initiates transferring (reading) data from the remote
+        memory to the local memory (see the
+        <a href="https://pmem.io/rpma/manpages/master/rpma_read.3" target="_blank">rpma_read(3) manual</a>
+        for details),</li>
+    <li><code>rpma_write()</code> - initiates transferring (writing) data from the local
+        memory to the remote memory (see the
+        <a href="https://pmem.io/rpma/manpages/master/rpma_write.3" target="_blank">rpma_write(3) manual</a>
+        for details),</li>
+    <li><code>rpma_flush()</code> - initiates finalizing a transfer of data to the remote
+        memory, it flushes data down to the persistent domain (see the
+        <a href="https://pmem.io/rpma/manpages/master/rpma_flush.3" target="_blank">rpma_flush(3) manual</a>
+        for details).</li>
 </ul>
 
 <p>
 In this example, after having established a connection (see the previous step for details),
 the client reads (using <code>rpma_read()</code>) an initial content of the server's memory
 (the string: "<i>The initial content of the server memory</i>"), then it writes
-(using <code>rpma_write()</code>) the new message ("<i>Hello world!</i>") to the server's memory
-and finally it flushes the just written data down to the persistent domain.
+(using <code>rpma_write()</code>) the new message ("<i>Hello world!</i>") to the server's
+memory and finally it flushes the just written data down to the persistent domain.
 
 <p>
-<b>Note:</b> this example uses exactly the same "connection.h" and "connection.c" files copied from the previous step.
+<b>Note:</b> this example uses exactly the same "connection.h" and "connection.c" files
+copied from the previous step.
 
 {{edit "client.c" "server.c" "connection.h" "build_main.sh"}}
 
@@ -145,7 +174,8 @@ During this session, you have:
 <p>
 Takeaways:
 <ul>
-    <li>Remote Persistent Memory (RPMem) is a way of accessing Persistent Memory when it is installed in a remote system</li>
+    <li>Remote Persistent Memory (RPMem) is a way of accessing Persistent Memory when
+        it is installed in a remote system</li>
     <li>RPMem leverages RDMA capabilities to achieve e.g.:
         <ul>
             <li>zero-copy read of the contents of RPMem</li>
@@ -159,15 +189,21 @@ Takeaways:
 <p>
 If you want to learn more:
 <ul>
-    <li><a href="https://github.com/pmem/rpma" target="_blank">https://github.com/pmem/rpma</a> - where librpma is forged
+    <li><a href="https://github.com/pmem/rpma" target="_blank">https://github.com/pmem/rpma</a>
+        - where librpma is forged
         <ul>
-            <li>We especially recommend getting familiar with <a href="https://github.com/pmem/rpma/tree/master/examples" target="_blank">examples</a> that allow you to learn other supported use-cases.</li>
+            <li>We especially recommend getting familiar with
+                <a href="https://github.com/pmem/rpma/tree/master/examples" target="_blank">examples</a>
+                that allow you to learn other supported use-cases.</li>
         </ul>
     </li>
-    <li><a href="https://pmem.io/rpma/" target="_blank">https://pmem.io/rpma/</a> - where you can find the librpma library manuals, configuration guidelines and performance reports</li>
-    <li>It may be also useful to read our whitepaper: <a href="https://www.intel.com/content/www/us/en/developer/articles/technical/persistent-memory-replication-over-traditional-rdma-part-1-understanding-remote-persistent.html" target="_blank">Persistent Memory Replication Over Traditional RDMA</a>
+    <li><a href="https://pmem.io/rpma/" target="_blank">https://pmem.io/rpma/</a>
+         - where you can find the librpma library manuals, configuration guidelines and performance reports</li>
+    <li>It may be also useful to read our whitepaper:
+        <a href="https://www.intel.com/content/www/us/en/developer/articles/technical/persistent-memory-replication-over-traditional-rdma-part-1-understanding-remote-persistent.html" target="_blank">Persistent Memory Replication Over Traditional RDMA</a>
         <ul>
-            <li><b>Note</b> it describes RPMem in the context of the librpmem library (do not confuse with librpma) which is a completely different story.</li>
+            <li><b>Note</b> it describes RPMem in the context of the librpmem library
+                (do not confuse with librpma) which is a completely different story.</li>
         </ul>
     </li>
 </ul>
