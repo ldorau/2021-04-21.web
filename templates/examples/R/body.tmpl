@@ -112,7 +112,7 @@ Now you will implement both sides of an RDMA connection:
 These applications intentionally do only connection and disconnection to familiarize you
 with these processes. Building on this you will do more in the next step.
 
-{{edit "simple_client.c" "simple_server.c" "connection.h" "connection.c" "CMakeLists.txt" "build_simple.sh"}}
+{{edit "simple_client.c" "simple_server.c" "common.h" "common.c" "CMakeLists.txt" "build_simple.sh"}}
 
 {{build "./build_simple.sh"}}
 
@@ -177,10 +177,10 @@ data. In general, it can be transferred via an out-of-band or the in-band
 channel.
 
 <p>
-<b>Note #3:</b> This example uses exactly the same "connection.h" and "connection.c"
+<b>Note #3:</b> This example uses exactly the same "common.h" and "common.c"
 files copied from the previous step.
 
-{{edit "client.c" "server.c" "connection.h" "build_main.sh"}}
+{{edit "client.c" "server.c" "common.h" "build_main.sh"}}
 
 {{build "./build_main.sh"}}
 
