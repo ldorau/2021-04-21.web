@@ -63,7 +63,7 @@ All used network interfaces should be configured, up and running with an IP addr
 assigned.
 
 <p>
-In this step, we will check the basic Ethernet network connectivity using the ping command
+First, you will check the basic Ethernet network connectivity using the ping command
 (see the <a href="https://linux.die.net/man/8/ping" target="_blank">ping(8)</a>
 manual for details).
 
@@ -72,13 +72,14 @@ manual for details).
 {{run "./run_test_ping.sh"}}
 
 <p>
-In this step we will check the RDMA connection with the RDMA ping-pong test using
+Next, you will check the RDMA connection with the RDMA ping-pong test using
 the rping command (provided by the librdmacm-utils package).
 
 <p>
 The rping(1) command establishes a reliable RDMA connection between two nodes using
 librdmacm and optionally performs RDMA transfers between the nodes, then disconnects.
-When rping works, we know that the RDMA connection is correctly configured and works well.
+When rping works, you can be sure that the RDMA connection is correctly configured
+and works well.
 
 {{edit "run_test_rping.sh"}}
 
@@ -95,7 +96,7 @@ PMem on remote systems over RDMA. For more information see
 <img src="/img/examples/{{.Ex}}/ecosystem.png" class="figure" style="width: 100%;">
 
 <p>
-In this step, you will implement both sides of an RDMA connection:
+You will implement both sides of an RDMA connection now:
 <ul>
     <li>a server that waits for incoming connections using a single endpoint (see the
         <a href="https://pmem.io/rpma/manpages/master/librpma.7.html#server-operation" target="_blank">server operation documentation</a>
@@ -120,8 +121,8 @@ with these processes. Building on this you will do more in the next step.
 {{step "Remote Persistent Memory access"}}
 
 <p>
-In this step we will read and write back RPMem's content in the persistent way using
-the following librpma functions:
+You will read and write back RPMem's content in the persistent way using
+the following librpma functions now:
 <ul>
     <li><code>rpma_read()</code> - initiates transferring (reading) data from the remote
         memory to the local memory (see the
