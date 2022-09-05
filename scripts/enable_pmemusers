@@ -125,7 +125,7 @@ for (my $id = $Lo; $id <= $Hi; $id++) {
 		runy("echo '$user:$Pass' | chpasswd");
 	}
 
-	my $ip = `./scripts/config_softroce.sh`;
+	my $ip = `./config_softroce.sh`;
 	die "config_softroce.sh failed: $ip\n" if ($? >> 8);
 	runy("echo 'enable_pmemusers: RPMA_SOFT_ROCE_IP=$ip'");
 	runy("echo 'enable_pmemusers: PMEMUSER_ID=$id'");
