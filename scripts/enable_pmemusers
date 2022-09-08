@@ -125,11 +125,17 @@ for (my $id = $Lo; $id <= $Hi; $id++) {
 		runy("echo '$user:$Pass' | chpasswd");
 	}
 
-	my $ip = `./config_softroce.sh`;
-	die "config_softroce.sh failed: $ip\n" if ($? >> 8);
-	runy("echo 'enable_pmemusers: RPMA_SOFT_ROCE_IP=$ip'");
 	runy("echo 'enable_pmemusers: PMEMUSER_ID=$id'");
 	runy("echo 'enable_pmemusers: DEV_DAX=$dev_dax'");
+
+	my $ip = `./config_softroce.sh`;
+	if ($? >> 8) {
+		say("WARNING: config_softroce.sh failed, SoftRoCE is not configured, the Example R will not work!");
+		$ip = "config_softroce.sh_failed";
+	} else {
+		runy("echo 'enable_pmemusers: RPMA_SOFT_ROCE_IP=$ip'");
+	}
+
 	runy("docker run -t -d --name=$user --network host --env RPMA_SOFT_ROCE_IP=$ip --env PMEMUSER_ID=$id --env DEV_DAX=$dev_dax --device /dev/infiniband --device $dev_dax -v /sys/class/infiniband:/sys/class/infiniband -v /sys/class/infiniband_verbs:/sys/class/infiniband_verbs -v /sys/class/misc/rdma_cm:/sys/class/misc/rdma_cm -v $H/users/$user/shadow:/etc/shadow -v $H/users/$user/passwd:/etc/passwd -v $H/users/$user/group:/etc/group -v $H/users/$user/home:/home/$user -v $pmemdir:/pmem -u $thisid:$thisid --hostname=container$id --workdir=/home/$user --cap-add SYS_PTRACE --restart=unless-stopped $Image");
 }
 
