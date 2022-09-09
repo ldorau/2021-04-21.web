@@ -78,48 +78,8 @@ RUN dnf update -y && dnf install -y\
 	xmlto\
 	xmvn
 
-RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash -
-
-RUN dnf install -y nodejs
-
-RUN dnf debuginfo-install -y glibc
-
-RUN dnf clean all
-
 COPY pmdk.sh /
 RUN /pmdk.sh
 
-COPY valgrind.sh /
-RUN /valgrind.sh
-
-COPY pmemobj-cpp.sh /
-RUN /pmemobj-cpp.sh
-
-COPY pmemkv.sh /
-RUN /pmemkv.sh
-
-COPY pmemkv-jni.sh /
-RUN /pmemkv-jni.sh
-
-COPY pmemkv-java.sh /
-RUN /pmemkv-java.sh
-
-COPY pmemkv-python.sh /
-RUN /pmemkv-python.sh
-
-COPY pmemkv-nodejs.sh /
-RUN /pmemkv-nodejs.sh
-
-COPY pmemkv-ruby.sh /
-RUN /pmemkv-ruby.sh
-
-COPY memkind.sh /
-RUN /memkind.sh
-
 COPY librpma.sh /
 RUN /librpma.sh
-
-COPY tz.sh /
-RUN /tz.sh
-
-RUN rm /pmdk.sh /valgrind.sh /pmemobj-cpp.sh /pmemkv.sh /pmemkv-jni.sh /pmemkv-java.sh /pmemkv-python.sh /pmemkv-nodejs.sh /pmemkv-ruby.sh /memkind.sh /librpma.sh /tz.sh
